@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: 'kotlin'
 
 sourceSets.main.java.srcDirs = ["src"]
 
@@ -28,8 +29,6 @@ repositories{
 }
 
 java{
-    targetCompatibility = JavaVersion.VERSION_17
-    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 ext{
@@ -43,6 +42,7 @@ ext{
 
 dependencies{
     compileOnly mindustryVersion == "be" ? "Anuken:MindustryBuilds:latest" : "Anuken:Mindustry:$mindustryVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }
 
 jar{
@@ -55,4 +55,16 @@ jar{
     from(rootDir){
         include "plugin.json"
     }
+}
+buildscript {
+    ext.kotlin_version = '2.4.10'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+kotlin {
+    jvmToolchain(17)
 }
