@@ -51,11 +51,8 @@ jar{
     from{
         configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
     }
-
-    from(rootDir){
-        include "plugin.json"
-    }
 }
+
 buildscript {
     ext.kotlin_version = '2.4.10'
     repositories {
